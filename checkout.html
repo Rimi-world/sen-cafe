@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>إكمال الطلب | SĒN Café</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--ink:#17201b;
+--forest:#25382d;
+--olive:#66745d;
+--cream:#f3eee4;
+--paper:#fbf8f1;
+--copper:#b7784f;
+--muted:#777d77;
+--line:rgba(23,32,27,.12);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:"Tajawal",sans-serif;
+background:var(--paper);
+color:var(--ink);
+}
+
+a{text-decoration:none;color:inherit}
+button,input,textarea{font-family:inherit}
+
+header{
+height:76px;
+padding:0 6%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+border-bottom:1px solid var(--line);
+background:rgba(251,248,241,.96);
+position:sticky;
+top:0;
+z-index:20;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:11px;
+font-weight:900;
+letter-spacing:2px;
+}
+
+.logo{
+width:43px;
+height:43px;
+border-radius:50%;
+background:var(--ink);
+color:white;
+display:grid;
+place-items:center;
+font-size:22px;
+}
+
+.back{
+padding:11px 17px;
+border:1px solid var(--line);
+border-radius:100px;
+font-size:13px;
+font-weight:800;
+}
+
+main{
+max-width:1200px;
+margin:auto;
+padding:60px 6% 100px;
+}
+
+.kicker{
+color:var(--copper);
+font-size:11px;
+font-weight:900;
+letter-spacing:2px;
+}
+
+h1{
+font-size:clamp(45px,6vw,75px);
+line-height:1;
+margin-top:10px;
+letter-spacing:-3px;
+}
+
+.intro{
+color:var(--muted);
+margin-top:14px;
+line-height:1.8;
+}
+
+.layout{
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:28px;
+margin-top:45px;
+align-items:start;
+}
+
+.card{
+background:white;
+border:1px solid var(--line);
+border-radius:22px;
+padding:27px;
+}
+
+.card + .card{
+margin-top:15px;
+}
+
+.card-number{
+color:var(--copper);
+font-size:10px;
+font-weight:900;
+}
+
+.card h2{
+margin-top:4px;
+font-size:21px;
+margin-bottom:21px;
+}
+
+.field-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:13px;
+}
+
+.field{
+display:flex;
+flex-direction:column;
+gap:7px;
+}
+
+.field.full{
+grid-column:1/-1;
+}
+
+label{
+font-size:11px;
+font-weight:800;
+color:#5f665f;
+}
+
+input,textarea{
+width:100%;
+border:1px solid var(--line);
+background:var(--paper);
+outline:0;
+border-radius:12px;
+padding:14px;
+color:var(--ink);
+font-size:14px;
+transition:.2s;
+}
+
+input:focus,textarea:focus{
+border-color:var(--forest);
+background:white;
+}
+
+textarea{
+min-height:90px;
+resize:vertical;
+}
+
+.delivery-options{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.delivery{
+position:relative;
+}
+
+.delivery input{
+position:absolute;
+opacity:0;
+pointer-events:none;
+}
+
+.delivery label{
+border:1px solid var(--line);
+border-radius:15px;
+min-height:100px;
+padding:16px;
+cursor:pointer;
+display:block;
+transition:.2s;
+}
+
+.delivery label strong{
+display:block;
+color:var(--ink);
+font-size:15px;
+}
+
+.delivery label span{
+display:block;
+color:var(--muted);
+margin-top:6px;
+font-size:11px;
+line-height:1.6;
+}
+
+.delivery input:checked + label{
+border-color:var(--forest);
+background:var(--forest);
+}
+
+.delivery input:checked + label strong,
+.delivery input:checked + label span{
+color:white;
+}
+
+.delivery input:checked + label span{
+opacity:.65;
+}
+
+.address{
+display:none;
+margin-top:18px;
+}
+
+/* SUMMARY */
+
+.summary{
+background:var(--forest);
+color:white;
+border-radius:23px;
+padding:28px;
+position:sticky;
+top:100px;
+}
+
+.summary small{
+color:#c8c2b9;
+}
+
+.summary h2{
+margin:5px 0 23px;
+font-size:23px;
+}
+
+.order-items{
+display:grid;
+gap:13px;
+margin-bottom:20px;
+}
+
+.order-item{
+display:flex;
+gap:12px;
+align-items:center;
+}
+
+.order-item img{
+width:55px;
+height:55px;
+border-radius:10px;
+object-fit:cover;
+}
+
+.order-item-info{
+flex:1;
+}
+
+.order-item-info strong{
+font-size:12px;
+display:block;
+}
+
+.order-item-info span{
+font-size:10px;
+color:rgba(255,255,255,.55);
+}
+
+.order-item-price{
+font-size:11px;
+font-weight:800;
+}
+
+.divider{
+height:1px;
+background:rgba(255,255,255,.13);
+margin:17px 0;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+padding:7px 0;
+font-size:12px;
+color:rgba(255,255,255,.7);
+}
+
+.total{
+display:flex;
+justify-content:space-between;
+align-items:end;
+margin-top:12px;
+}
+
+.total span{
+font-weight:800;
+}
+
+.total strong{
+font-size:25px;
+}
+
+.continue{
+width:100%;
+margin-top:23px;
+border:0;
+background:var(--paper);
+color:var(--ink);
+padding:17px;
+border-radius:13px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:13px;
+font-weight:900;
+cursor:pointer;
+}
+
+.notice{
+text-align:center;
+color:rgba(255,255,255,.43);
+font-size:9px;
+line-height:1.6;
+margin-top:11px;
+}
+
+.error{
+display:none;
+color:#9b473f;
+background:#f7e8e4;
+border-radius:10px;
+padding:11px;
+margin-bottom:15px;
+font-size:11px;
+font-weight:700;
+}
+
+.empty{
+text-align:center;
+padding:90px 20px;
+}
+
+.empty h2{
+font-size:28px;
+}
+
+.empty p{
+color:var(--muted);
+margin:8px 0 22px;
+}
+
+.empty a{
+display:inline-block;
+background:var(--ink);
+color:white;
+padding:13px 22px;
+border-radius:100px;
+font-weight:800;
+}
+
+@media(max-width:850px){
+main{padding:45px 5% 80px}
+.layout{grid-template-columns:1fr}
+.summary{position:relative;top:0}
+}
+
+@media(max-width:550px){
+header{padding:0 5%}
+h1{letter-spacing:-2px}
+.field-grid{grid-template-columns:1fr}
+.field.full{grid-column:auto}
+.delivery-options{grid-template-columns:1fr}
+.card{padding:21px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="index.html" class="brand">
+<div class="logo">س</div>
+<span>SĒN</span>
+</a>
+
+<a href="cart.html" class="back">← السلة</a>
+</header>
+
+<main id="mainContent">
+
+<div class="kicker">CHECKOUT · SĒN</div>
+<h1>آخر التفاصيل.</h1>
+
+<p class="intro">
+عرفنا كيف نجهز طلبك، والباقي علينا.
+</p>
+
+<div class="layout">
+
+<section>
+
+<div class="card">
+<div class="card-number">01 / CUSTOMER</div>
+<h2>بياناتك</h2>
+
+<div class="error" id="error">
+تأكد من تعبئة الاسم ورقم الهاتف.
+</div>
+
+<div class="field-grid">
+
+<div class="field">
+<label>الاسم</label>
+<input id="name" type="text" placeholder="اسمك">
+</div>
+
+<div class="field">
+<label>رقم الهاتف</label>
+<input id="phone" type="tel" placeholder="9XXXXXXX">
+</div>
+
+<div class="field full">
+<label>البريد الإلكتروني — اختياري</label>
+<input id="email" type="email" placeholder="name@example.com">
+</div>
+
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-number">02 / RECEIVE</div>
+<h2>كيف تستلم طلبك؟</h2>
+
+<div class="delivery-options">
+
+<div class="delivery">
+<input
+type="radio"
+name="delivery"
+id="pickup"
+value="استلام من الفرع"
+checked
+>
+
+<label for="pickup">
+<strong>استلام من الفرع</strong>
+<span>
+جهز طلبك واستلمه مباشرة من سِين.
+</span>
+</label>
+</div>
+
+<div class="delivery">
+<input
+type="radio"
+name="delivery"
+id="delivery"
+value="توصيل"
+>
+
+<label for="delivery">
+<strong>توصيل</strong>
+<span>
+نوصل طلبك إلى عنوانك.
+</span>
+</label>
+</div>
+
+</div>
+
+<div class="address" id="addressFields">
+
+<div class="field-grid">
+
+<div class="field">
+<label>المنطقة</label>
+<input id="area" type="text" placeholder="مثال: الخوض">
+</div>
+
+<div class="field">
+<label>الشارع / الحي</label>
+<input id="street" type="text" placeholder="اسم الشارع">
+</div>
+
+<div class="field full">
+<label>تفاصيل العنوان</label>
+<input
+id="address"
+type="text"
+placeholder="رقم المنزل أو أقرب معلم"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-number">03 / NOTES</div>
+<h2>ملاحظة للطلب</h2>
+
+<div class="field">
+<label>اختياري</label>
+<textarea
+id="notes"
+placeholder="أي ملاحظة تحب تضيفها؟"
+></textarea>
+</div>
+</div>
+
+</section>
+
+
+<aside class="summary">
+
+<small>YOUR ORDER</small>
+<h2>ملخص الطلب</h2>
+
+<div class="order-items" id="orderItems"></div>
+
+<div class="divider"></div>
+
+<div class="row">
+<span>المجموع</span>
+<strong id="subtotal">0.000 ر.ع</strong>
+</div>
+
+<div class="row" id="discountRow">
+<span>الخصم</span>
+<strong id="discount">0.000 ر.ع</strong>
+</div>
+
+<div class="row" id="deliveryRow">
+<span>التوصيل</span>
+<strong id="deliveryFee">0.000 ر.ع</strong>
+</div>
+
+<div class="divider"></div>
+
+<div class="total">
+<span>الإجمالي</span>
+<strong id="total">0.000 ر.ع</strong>
+</div>
+
+<button class="continue" onclick="continueOrder()">
+<span>المتابعة للدفع</span>
+<span>←</span>
+</button>
+
+<div class="notice">
+هذه تجربة عرض للموقع ولا يتم تنفيذ دفع حقيقي.
+</div>
+
+</aside>
+
+</div>
+
+</main>
+
+<script>
+const cart =
+JSON.parse(localStorage.getItem("senCart")) || [];
+
+const savedTotals =
+JSON.parse(localStorage.getItem("senTotals")) || {};
+
+let deliveryFee=0;
+
+
+function money(value){
+return Number(value).toFixed(3)+" ر.ع";
+}
+
+
+function calculateSubtotal(){
+
+let subtotal=0;
+
+cart.forEach(item=>{
+subtotal +=
+Number(item.unitPrice) *
+Number(item.quantity);
+});
+
+return subtotal;
+}
+
+
+function renderItems(){
+
+if(cart.length===0){
+
+document.getElementById("mainContent").innerHTML=`
+<div class="empty">
+<h2>ما فيه طلب نكمله.</h2>
+<p>أضف شيء من المنيو أولًا.</p>
+<a href="menu.html">الذهاب للمنيو</a>
+</div>
+`;
+
+return;
+}
+
+const container=
+document.getElementById("orderItems");
+
+container.innerHTML="";
+
+cart.forEach(item=>{
+
+const row=document.createElement("div");
+row.className="order-item";
+
+row.innerHTML=`
+<img src="${item.image}" alt="${item.name}">
+
+<div class="order-item-info">
+<strong>${item.name}</strong>
+<span>الكمية: ${item.quantity}</span>
+</div>
+
+<div class="order-item-price">
+${money(item.unitPrice*item.quantity)}
+</div>
+`;
+
+container.appendChild(row);
+
+});
+
+updateTotals();
+}
+
+
+function updateTotals(){
+
+const subtotal=calculateSubtotal();
+
+const discount=
+localStorage.getItem("senCoupon")==="SEN10"
+? subtotal*.10
+: 0;
+
+const total=
+subtotal-discount+deliveryFee;
+
+document.getElementById("subtotal").textContent=
+money(subtotal);
+
+document.getElementById("discount").textContent=
+discount ? "-"+money(discount) : money(0);
+
+document.getElementById("deliveryFee").textContent=
+deliveryFee ? money(deliveryFee) : "مجاني";
+
+document.getElementById("total").textContent=
+money(total);
+
+localStorage.setItem(
+"senCheckoutTotals",
+JSON.stringify({
+subtotal,
+discount,
+deliveryFee,
+total
+})
+);
+}
+
+
+document
+.querySelectorAll('input[name="delivery"]')
+.forEach(input=>{
+
+input.addEventListener("change",()=>{
+
+const isDelivery=
+document.getElementById("delivery").checked;
+
+document.getElementById(
+"addressFields"
+).style.display=
+isDelivery ? "block" : "none";
+
+deliveryFee=
+isDelivery ? .700 : 0;
+
+updateTotals();
+
+});
+
+});
+
+
+function continueOrder(){
+
+const name=
+document.getElementById("name").value.trim();
+
+const phone=
+document.getElementById("phone").value.trim();
+
+const email=
+document.getElementById("email").value.trim();
+
+const notes=
+document.getElementById("notes").value.trim();
+
+const method=
+document.querySelector(
+'input[name="delivery"]:checked'
+).value;
+
+const isDelivery=
+document.getElementById("delivery").checked;
+
+const area=
+document.getElementById("area").value.trim();
+
+const street=
+document.getElementById("street").value.trim();
+
+const address=
+document.getElementById("address").value.trim();
+
+const error=
+document.getElementById("error");
+
+
+if(!name || !phone){
+
+error.textContent=
+"تأكد من تعبئة الاسم ورقم الهاتف.";
+
+error.style.display="block";
+window.scrollTo({top:200,behavior:"smooth"});
+return;
+}
+
+
+if(isDelivery && (!area || !address)){
+
+error.textContent=
+"أضف المنطقة وتفاصيل عنوان التوصيل.";
+
+error.style.display="block";
+window.scrollTo({top:200,behavior:"smooth"});
+return;
+}
+
+
+error.style.display="none";
+
+
+const customer={
+name,
+phone,
+email,
+notes,
+method,
+area,
+street,
+address
+};
+
+
+localStorage.setItem(
+"senCustomer",
+JSON.stringify(customer)
+);
+
+
+window.location.href="payment.html";
+}
+
+
+renderItems();
+</script>
+
+</body>
+</html>
