@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>الدفع | SĒN Café</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--ink:#17201b;
+--forest:#25382d;
+--cream:#f3eee4;
+--paper:#fbf8f1;
+--copper:#b7784f;
+--muted:#777d77;
+--line:rgba(23,32,27,.12);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:"Tajawal",sans-serif;
+background:var(--paper);
+color:var(--ink);
+}
+
+a{text-decoration:none;color:inherit}
+button,input{font-family:inherit}
+
+header{
+height:76px;
+padding:0 6%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+border-bottom:1px solid var(--line);
+background:rgba(251,248,241,.96);
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:11px;
+font-weight:900;
+letter-spacing:2px;
+}
+
+.logo{
+width:43px;
+height:43px;
+border-radius:50%;
+background:var(--ink);
+color:white;
+display:grid;
+place-items:center;
+font-size:22px;
+}
+
+.back{
+padding:11px 17px;
+border:1px solid var(--line);
+border-radius:100px;
+font-size:13px;
+font-weight:800;
+}
+
+main{
+max-width:1100px;
+margin:auto;
+padding:65px 6% 100px;
+}
+
+.kicker{
+color:var(--copper);
+font-size:11px;
+font-weight:900;
+letter-spacing:2px;
+}
+
+h1{
+font-size:clamp(48px,7vw,82px);
+line-height:.95;
+margin-top:10px;
+letter-spacing:-4px;
+}
+
+.subtitle{
+color:var(--muted);
+margin-top:15px;
+line-height:1.8;
+}
+
+.layout{
+display:grid;
+grid-template-columns:1.1fr .9fr;
+gap:25px;
+margin-top:45px;
+align-items:start;
+}
+
+.box{
+background:white;
+border:1px solid var(--line);
+border-radius:22px;
+padding:27px;
+}
+
+.box h2{
+font-size:21px;
+margin-bottom:6px;
+}
+
+.box-desc{
+color:var(--muted);
+font-size:12px;
+line-height:1.7;
+margin-bottom:23px;
+}
+
+.methods{
+display:grid;
+gap:10px;
+}
+
+.method{
+position:relative;
+}
+
+.method input{
+position:absolute;
+opacity:0;
+}
+
+.method label{
+border:1px solid var(--line);
+border-radius:15px;
+padding:17px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+cursor:pointer;
+transition:.2s;
+}
+
+.method-title{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.method-icon{
+width:42px;
+height:42px;
+border-radius:12px;
+background:var(--cream);
+display:grid;
+place-items:center;
+font-size:18px;
+}
+
+.method strong{
+display:block;
+font-size:14px;
+}
+
+.method small{
+color:var(--muted);
+}
+
+.method input:checked + label{
+border-color:var(--forest);
+background:#f0f2ed;
+}
+
+.check{
+width:21px;
+height:21px;
+border:1px solid var(--line);
+border-radius:50%;
+}
+
+.method input:checked + label .check{
+border:6px solid var(--forest);
+}
+
+/* TRANSFER */
+
+.transfer{
+display:none;
+margin-top:18px;
+background:var(--cream);
+border-radius:16px;
+padding:20px;
+}
+
+.transfer-row{
+display:flex;
+justify-content:space-between;
+gap:20px;
+padding:8px 0;
+font-size:12px;
+border-bottom:1px solid var(--line);
+}
+
+.transfer-row:last-child{
+border-bottom:0;
+}
+
+.transfer-row span{
+color:var(--muted);
+}
+
+.transfer-row strong{
+text-align:left;
+}
+
+.receipt{
+margin-top:18px;
+}
+
+.upload{
+border:1px dashed #aaa;
+border-radius:14px;
+padding:24px;
+text-align:center;
+cursor:pointer;
+display:block;
+}
+
+.upload strong{
+display:block;
+font-size:13px;
+}
+
+.upload span{
+display:block;
+color:var(--muted);
+font-size:10px;
+margin-top:5px;
+}
+
+.upload input{
+display:none;
+}
+
+.file-name{
+margin-top:9px;
+font-size:11px;
+color:var(--forest);
+}
+
+/* SUMMARY */
+
+.summary{
+background:var(--forest);
+color:white;
+border-radius:22px;
+padding:27px;
+position:sticky;
+top:25px;
+}
+
+.summary small{
+color:#c7c1b8;
+}
+
+.summary h2{
+margin:5px 0 24px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+padding:8px 0;
+font-size:12px;
+color:rgba(255,255,255,.68);
+}
+
+.divider{
+height:1px;
+background:rgba(255,255,255,.14);
+margin:15px 0;
+}
+
+.total{
+display:flex;
+justify-content:space-between;
+align-items:end;
+}
+
+.total strong{
+font-size:28px;
+}
+
+.pay{
+width:100%;
+border:0;
+border-radius:13px;
+background:var(--paper);
+color:var(--ink);
+padding:17px;
+margin-top:25px;
+font-size:13px;
+font-weight:900;
+cursor:pointer;
+display:flex;
+justify-content:space-between;
+}
+
+.demo{
+margin-top:12px;
+text-align:center;
+color:rgba(255,255,255,.45);
+font-size:9px;
+line-height:1.6;
+}
+
+.customer{
+margin-top:20px;
+padding-top:18px;
+border-top:1px solid rgba(255,255,255,.13);
+}
+
+.customer strong{
+display:block;
+font-size:12px;
+}
+
+.customer span{
+display:block;
+color:rgba(255,255,255,.55);
+font-size:10px;
+margin-top:4px;
+}
+
+.error{
+display:none;
+margin-top:13px;
+padding:11px;
+border-radius:10px;
+background:#f7e7e3;
+color:#93483f;
+font-size:11px;
+font-weight:700;
+}
+
+@media(max-width:800px){
+main{padding:45px 5% 80px}
+.layout{grid-template-columns:1fr}
+.summary{position:relative;top:0}
+}
+
+@media(max-width:500px){
+header{padding:0 5%}
+h1{letter-spacing:-2px}
+.box,.summary{padding:21px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="index.html" class="brand">
+<div class="logo">س</div>
+<span>SĒN</span>
+</a>
+
+<a href="checkout.html" class="back">← رجوع</a>
+</header>
+
+<main>
+
+<div class="kicker">PAYMENT · FINAL STEP</div>
+<h1>خطوة أخيرة.</h1>
+
+<p class="subtitle">
+اختر طريقة الدفع المناسبة وأكد طلبك.
+</p>
+
+
+<div class="layout">
+
+<section>
+
+<div class="box">
+
+<h2>طريقة الدفع</h2>
+
+<p class="box-desc">
+اختر إحدى الطرق التالية لإكمال تجربة الطلب.
+</p>
+
+
+<div class="methods">
+
+<div class="method">
+<input
+type="radio"
+name="payment"
+id="pickupPay"
+value="الدفع عند الاستلام"
+checked
+>
+
+<label for="pickupPay">
+
+<div class="method-title">
+<div class="method-icon">☕</div>
+
+<div>
+<strong>الدفع عند الاستلام</strong>
+<small>ادفع عند استلام طلبك</small>
+</div>
+</div>
+
+<div class="check"></div>
+
+</label>
+</div>
+
+
+<div class="method">
+<input
+type="radio"
+name="payment"
+id="transferPay"
+value="تحويل بنكي"
+>
+
+<label for="transferPay">
+
+<div class="method-title">
+<div class="method-icon">↗</div>
+
+<div>
+<strong>تحويل بنكي</strong>
+<small>عرض تجريبي فقط</small>
+</div>
+</div>
+
+<div class="check"></div>
+
+</label>
+</div>
+
+</div>
+
+
+<div class="transfer" id="transferBox">
+
+<div class="transfer-row">
+<span>اسم الحساب</span>
+<strong>SĒN CAFÉ — DEMO</strong>
+</div>
+
+<div class="transfer-row">
+<span>الحساب</span>
+<strong>DEMO-0000</strong>
+</div>
+
+<div class="transfer-row">
+<span>ملاحظة</span>
+<strong>بيانات تجريبية وليست للدفع الحقيقي</strong>
+</div>
+
+
+<div class="receipt">
+
+<label class="upload">
+<strong>إرفاق إيصال تجريبي</strong>
+<span>اضغط لاختيار صورة من جهازك</span>
+
+<input
+type="file"
+id="receipt"
+accept="image/*"
+>
+</label>
+
+<div class="file-name" id="fileName"></div>
+
+</div>
+
+</div>
+
+<div class="error" id="error"></div>
+
+</div>
+
+</section>
+
+
+<aside class="summary">
+
+<small>ORDER TOTAL</small>
+<h2>ملخص الدفع</h2>
+
+<div class="row">
+<span>المجموع</span>
+<strong id="subtotal">0.000 ر.ع</strong>
+</div>
+
+<div class="row">
+<span>الخصم</span>
+<strong id="discount">0.000 ر.ع</strong>
+</div>
+
+<div class="row">
+<span>التوصيل</span>
+<strong id="delivery">0.000 ر.ع</strong>
+</div>
+
+<div class="divider"></div>
+
+<div class="total">
+<span>الإجمالي</span>
+<strong id="total">0.000 ر.ع</strong>
+</div>
+
+
+<div class="customer">
+<strong id="customerName">—</strong>
+<span id="customerInfo">—</span>
+</div>
+
+
+<button class="pay" onclick="finishOrder()">
+<span>تأكيد الطلب</span>
+<span>←</span>
+</button>
+
+<div class="demo">
+DEMO CHECKOUT<br>
+لا يتم خصم أو تحويل أي مبلغ حقيقي.
+</div>
+
+</aside>
+
+</div>
+
+</main>
+
+
+<script>
+const totals=
+JSON.parse(
+localStorage.getItem("senCheckoutTotals")
+) || {
+subtotal:0,
+discount:0,
+deliveryFee:0,
+total:0
+};
+
+const customer=
+JSON.parse(
+localStorage.getItem("senCustomer")
+) || {};
+
+
+function money(value){
+return Number(value || 0).toFixed(3)+" ر.ع";
+}
+
+
+document.getElementById("subtotal").textContent=
+money(totals.subtotal);
+
+document.getElementById("discount").textContent=
+totals.discount
+? "-"+money(totals.discount)
+: money(0);
+
+document.getElementById("delivery").textContent=
+totals.deliveryFee
+? money(totals.deliveryFee)
+: "مجاني";
+
+document.getElementById("total").textContent=
+money(totals.total);
+
+
+document.getElementById("customerName").textContent=
+customer.name || "عميل سِين";
+
+document.getElementById("customerInfo").textContent=
+(customer.phone || "") +
+(customer.method ? " · "+customer.method : "");
+
+
+const transferBox=
+document.getElementById("transferBox");
+
+
+document
+.querySelectorAll('input[name="payment"]')
+.forEach(input=>{
+
+input.addEventListener("change",()=>{
+
+transferBox.style.display=
+document.getElementById("transferPay").checked
+? "block"
+: "none";
+
+});
+
+});
+
+
+document
+.getElementById("receipt")
+.addEventListener("change",function(){
+
+const file=this.files[0];
+
+document.getElementById("fileName").textContent=
+file
+? "تم اختيار: "+file.name+" ✓"
+: "";
+
+});
+
+
+function createOrderNumber(){
+return "SEN-"+Math.floor(1000+Math.random()*9000);
+}
+
+
+function finishOrder(){
+
+const payment=
+document.querySelector(
+'input[name="payment"]:checked'
+).value;
+
+const error=
+document.getElementById("error");
+
+const transferSelected=
+document.getElementById("transferPay").checked;
+
+const receipt=
+document.getElementById("receipt").files[0];
+
+
+if(transferSelected && !receipt){
+
+error.style.display="block";
+
+error.textContent=
+"أرفق إيصالًا تجريبيًا لإكمال تجربة التحويل.";
+
+return;
+}
+
+
+error.style.display="none";
+
+
+const order={
+number:createOrderNumber(),
+customer,
+items:
+JSON.parse(
+localStorage.getItem("senCart")
+) || [],
+totals,
+payment,
+status:"تم استلام الطلب",
+createdAt:new Date().toISOString()
+};
+
+
+localStorage.setItem(
+"senLastOrder",
+JSON.stringify(order)
+);
+
+
+const orders=
+JSON.parse(
+localStorage.getItem("senOrders")
+) || [];
+
+
+orders.unshift(order);
+
+
+localStorage.setItem(
+"senOrders",
+JSON.stringify(orders)
+);
+
+
+localStorage.removeItem("senCart");
+localStorage.removeItem("senCoupon");
+localStorage.removeItem("senTotals");
+
+
+window.location.href="success.html";
+}
+</script>
+
+</body>
+</html>
