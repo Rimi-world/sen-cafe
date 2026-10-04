@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>سلتك | SĒN Café</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--ink:#17201b;
+--forest:#25382d;
+--olive:#66745d;
+--cream:#f3eee4;
+--paper:#fbf8f1;
+--copper:#b7784f;
+--muted:#777d77;
+--line:rgba(23,32,27,.12);
+--red:#a14e43;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:"Tajawal",sans-serif;
+background:var(--paper);
+color:var(--ink);
+}
+
+a{text-decoration:none;color:inherit}
+button,input{font-family:inherit}
+
+header{
+height:76px;
+padding:0 6%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+border-bottom:1px solid var(--line);
+background:rgba(251,248,241,.95);
+position:sticky;
+top:0;
+z-index:20;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:11px;
+font-weight:900;
+letter-spacing:2px;
+}
+
+.logo{
+width:43px;
+height:43px;
+border-radius:50%;
+background:var(--ink);
+color:white;
+display:grid;
+place-items:center;
+font-size:22px;
+}
+
+.back{
+padding:11px 17px;
+border:1px solid var(--line);
+border-radius:100px;
+font-size:13px;
+font-weight:800;
+}
+
+main{
+padding:70px 6% 100px;
+max-width:1250px;
+margin:auto;
+}
+
+.kicker{
+color:var(--copper);
+font-size:11px;
+font-weight:900;
+letter-spacing:2px;
+}
+
+h1{
+font-size:clamp(48px,7vw,90px);
+line-height:.95;
+margin-top:10px;
+letter-spacing:-4px;
+}
+
+.intro{
+color:var(--muted);
+margin-top:15px;
+line-height:1.8;
+}
+
+.layout{
+display:grid;
+grid-template-columns:1.35fr .65fr;
+gap:30px;
+margin-top:45px;
+align-items:start;
+}
+
+.cart-list{
+display:grid;
+gap:13px;
+}
+
+.item{
+background:white;
+border:1px solid var(--line);
+border-radius:20px;
+padding:15px;
+display:grid;
+grid-template-columns:120px 1fr auto;
+gap:18px;
+align-items:center;
+}
+
+.item-image{
+width:120px;
+height:120px;
+border-radius:14px;
+object-fit:cover;
+}
+
+.item h3{
+font-size:18px;
+}
+
+.details{
+margin-top:7px;
+color:var(--muted);
+font-size:12px;
+line-height:1.7;
+}
+
+.item-price{
+color:var(--copper);
+font-weight:900;
+margin-top:10px;
+}
+
+.item-actions{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:12px;
+}
+
+.qty{
+display:flex;
+align-items:center;
+gap:11px;
+background:var(--cream);
+border-radius:100px;
+padding:5px;
+}
+
+.qty button{
+width:31px;
+height:31px;
+border:0;
+background:white;
+border-radius:50%;
+font-size:17px;
+cursor:pointer;
+}
+
+.qty span{
+min-width:18px;
+text-align:center;
+font-weight:900;
+}
+
+.remove{
+border:0;
+background:transparent;
+color:var(--red);
+font-size:11px;
+font-weight:800;
+cursor:pointer;
+}
+
+/* SUMMARY */
+
+.summary{
+background:var(--forest);
+color:white;
+border-radius:23px;
+padding:27px;
+position:sticky;
+top:100px;
+}
+
+.summary small{
+color:#c5bdb2;
+}
+
+.summary h2{
+font-size:25px;
+margin-top:5px;
+margin-bottom:25px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+gap:15px;
+padding:10px 0;
+font-size:13px;
+color:rgba(255,255,255,.72);
+}
+
+.discount-row{
+color:#d7b092;
+}
+
+.divider{
+height:1px;
+background:rgba(255,255,255,.14);
+margin:13px 0;
+}
+
+.total-row{
+display:flex;
+justify-content:space-between;
+align-items:end;
+padding:10px 0 22px;
+}
+
+.total-row span{
+font-weight:800;
+}
+
+.total-row strong{
+font-size:26px;
+}
+
+.coupon{
+margin:8px 0 18px;
+}
+
+.coupon label{
+font-size:11px;
+color:#c5bdb2;
+}
+
+.coupon-box{
+display:flex;
+gap:7px;
+margin-top:8px;
+}
+
+.coupon input{
+width:100%;
+min-width:0;
+border:1px solid rgba(255,255,255,.18);
+background:rgba(255,255,255,.07);
+color:white;
+outline:0;
+border-radius:11px;
+padding:12px;
+text-transform:uppercase;
+}
+
+.coupon button{
+border:0;
+border-radius:11px;
+background:var(--copper);
+color:white;
+padding:0 15px;
+font-weight:900;
+cursor:pointer;
+}
+
+.coupon-message{
+min-height:18px;
+margin-top:7px;
+font-size:10px;
+color:#e1b896;
+}
+
+.checkout{
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:16px 18px;
+border-radius:13px;
+background:var(--paper);
+color:var(--ink);
+font-size:13px;
+font-weight:900;
+}
+
+.secure{
+text-align:center;
+font-size:10px;
+color:rgba(255,255,255,.45);
+margin-top:12px;
+}
+
+/* EMPTY */
+
+.empty{
+display:none;
+text-align:center;
+padding:100px 20px;
+background:white;
+border-radius:24px;
+border:1px solid var(--line);
+}
+
+.empty-icon{
+width:70px;
+height:70px;
+border-radius:50%;
+background:var(--cream);
+display:grid;
+place-items:center;
+margin:0 auto 18px;
+font-size:28px;
+}
+
+.empty h2{
+font-size:28px;
+}
+
+.empty p{
+color:var(--muted);
+margin:8px 0 25px;
+}
+
+.empty a{
+display:inline-block;
+background:var(--ink);
+color:white;
+padding:14px 23px;
+border-radius:100px;
+font-weight:800;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+main{padding:50px 5% 80px}
+.layout{grid-template-columns:1fr}
+.summary{position:relative;top:0}
+}
+
+@media(max-width:600px){
+header{padding:0 5%}
+h1{letter-spacing:-2px}
+
+.item{
+grid-template-columns:90px 1fr;
+}
+
+.item-image{
+width:90px;
+height:100px;
+}
+
+.item-actions{
+grid-column:1/-1;
+flex-direction:row;
+justify-content:space-between;
+}
+
+.summary{
+padding:23px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="index.html" class="brand">
+<div class="logo">س</div>
+<span>SĒN</span>
+</a>
+
+<a href="menu.html" class="back">← أضف المزيد</a>
+</header>
+
+<main>
+
+<div class="kicker">YOUR ORDER · SĒN</div>
+<h1>سلتك.</h1>
+
+<p class="intro">
+راجع اختياراتك وعدّل الكمية قبل إكمال الطلب.
+</p>
+
+
+<div class="layout" id="cartLayout">
+
+<section class="cart-list" id="cartList"></section>
+
+
+<aside class="summary">
+
+<small>ORDER SUMMARY</small>
+<h2>ملخص الطلب</h2>
+
+<div class="row">
+<span>المجموع</span>
+<strong id="subtotal">0.000 ر.ع</strong>
+</div>
+
+<div class="row discount-row" id="discountRow" style="display:none">
+<span>خصم SEN10</span>
+<strong id="discount">-0.000 ر.ع</strong>
+</div>
+
+<div class="coupon">
+<label>عندك كود خصم؟</label>
+
+<div class="coupon-box">
+<input
+id="couponInput"
+placeholder="SEN10"
+maxlength="10"
+>
+<button onclick="applyCoupon()">تطبيق</button>
+</div>
+
+<div class="coupon-message" id="couponMessage"></div>
+</div>
+
+<div class="divider"></div>
+
+<div class="total-row">
+<span>الإجمالي</span>
+<strong id="grandTotal">0.000 ر.ع</strong>
+</div>
+
+<a href="checkout.html" class="checkout">
+<span>إكمال الطلب</span>
+<span>←</span>
+</a>
+
+<div class="secure">
+طلبك محفوظ حتى إكمال عملية الطلب
+</div>
+
+</aside>
+
+</div>
+
+
+<section class="empty" id="emptyState">
+<div class="empty-icon">☕</div>
+<h2>سلتك تنتظر مزاجك.</h2>
+<p>اختر مشروبك أو الحلى المفضل من قائمة سِين.</p>
+<a href="menu.html">تصفح المنيو</a>
+</section>
+
+</main>
+
+
+<script>
+let cart =
+JSON.parse(localStorage.getItem("senCart")) || [];
+
+let couponApplied =
+localStorage.getItem("senCoupon")==="SEN10";
+
+
+function save(){
+localStorage.setItem("senCart",JSON.stringify(cart));
+render();
+}
+
+
+function money(value){
+return Number(value).toFixed(3)+" ر.ع";
+}
+
+
+function render(){
+
+const list=document.getElementById("cartList");
+const layout=document.getElementById("cartLayout");
+const empty=document.getElementById("emptyState");
+
+if(cart.length===0){
+layout.style.display="none";
+empty.style.display="block";
+return;
+}
+
+layout.style.display="grid";
+empty.style.display="none";
+
+list.innerHTML="";
+
+cart.forEach((item,index)=>{
+
+const details=[];
+
+if(item.size) details.push("الحجم: "+item.size);
+if(item.milk) details.push("الحليب: "+item.milk);
+if(item.sweetness) details.push("الحلاوة: "+item.sweetness);
+
+if(item.extras && item.extras.length){
+details.push("الإضافات: "+item.extras.join("، "));
+}
+
+const element=document.createElement("article");
+element.className="item";
+
+element.innerHTML=`
+<img class="item-image" src="${item.image}" alt="${item.name}">
+
+<div>
+<h3>${item.name}</h3>
+
+<div class="details">
+${details.length ? details.join("<br>") : "قطعة واحدة"}
+</div>
+
+<div class="item-price">
+${money(item.unitPrice * item.quantity)}
+</div>
+</div>
+
+<div class="item-actions">
+
+<div class="qty">
+<button onclick="changeQty(${index},-1)">−</button>
+<span>${item.quantity}</span>
+<button onclick="changeQty(${index},1)">+</button>
+</div>
+
+<button
+class="remove"
+onclick="removeItem(${index})">
+حذف
+</button>
+
+</div>
+`;
+
+list.appendChild(element);
+
+});
+
+calculateTotals();
+}
+
+
+function changeQty(index,amount){
+
+cart[index].quantity =
+Math.max(1,Number(cart[index].quantity)+amount);
+
+cart[index].total =
+Number(cart[index].unitPrice) *
+cart[index].quantity;
+
+save();
+}
+
+
+function removeItem(index){
+cart.splice(index,1);
+save();
+}
+
+
+function calculateTotals(){
+
+let subtotal=0;
+
+cart.forEach(item=>{
+subtotal +=
+Number(item.unitPrice) *
+Number(item.quantity);
+});
+
+let discount=0;
+
+if(couponApplied){
+discount=subtotal*.10;
+}
+
+const total=subtotal-discount;
+
+document.getElementById("subtotal").textContent=
+money(subtotal);
+
+document.getElementById("discount").textContent=
+"-"+money(discount);
+
+document.getElementById("grandTotal").textContent=
+money(total);
+
+document.getElementById("discountRow").style.display=
+couponApplied ? "flex" : "none";
+
+localStorage.setItem(
+"senTotals",
+JSON.stringify({
+subtotal,
+discount,
+total
+})
+);
+}
+
+
+function applyCoupon(){
+
+const input=
+document.getElementById("couponInput");
+
+const message=
+document.getElementById("couponMessage");
+
+const code=
+input.value.trim().toUpperCase();
+
+if(code==="SEN10"){
+
+couponApplied=true;
+
+localStorage.setItem(
+"senCoupon",
+"SEN10"
+);
+
+message.textContent=
+"تم تطبيق خصم 10% ✓";
+
+}else{
+
+couponApplied=false;
+
+localStorage.removeItem("senCoupon");
+
+message.textContent=
+"الكود غير صحيح";
+
+}
+
+calculateTotals();
+}
+
+
+if(couponApplied){
+document.getElementById("couponInput").value="SEN10";
+document.getElementById("couponMessage").textContent=
+"تم تطبيق خصم 10% ✓";
+}
+
+render();
+</script>
+
+</body>
+</html>
