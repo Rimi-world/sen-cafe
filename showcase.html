@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SĒN — Customer Experience Demo</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--ink:#17201b;
+--forest:#25382d;
+--olive:#66745d;
+--cream:#f3eee4;
+--paper:#fbf8f1;
+--copper:#b7784f;
+--muted:#777d77;
+--line:rgba(23,32,27,.12);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+font-family:"Tajawal",sans-serif;
+background:#0d120f;
+overflow:hidden;
+color:var(--ink);
+}
+
+.demo{
+width:100vw;
+height:100vh;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.browser{
+width:min(1180px,94vw);
+height:min(760px,90vh);
+background:var(--paper);
+border-radius:22px;
+overflow:hidden;
+box-shadow:0 35px 100px rgba(0,0,0,.4);
+position:relative;
+}
+
+.browserbar{
+height:52px;
+background:#ece8df;
+border-bottom:1px solid var(--line);
+display:flex;
+align-items:center;
+padding:0 17px;
+gap:12px;
+direction:ltr;
+}
+
+.dots{
+display:flex;
+gap:6px;
+}
+
+.dots i{
+width:9px;
+height:9px;
+border-radius:50%;
+background:#c4bfb5;
+}
+
+.address{
+flex:1;
+max-width:450px;
+margin:auto;
+height:29px;
+background:rgba(255,255,255,.65);
+border-radius:100px;
+display:grid;
+place-items:center;
+font-size:9px;
+color:#777;
+}
+
+.screen{
+height:calc(100% - 52px);
+position:relative;
+overflow:hidden;
+background:var(--paper);
+}
+
+.scene{
+position:absolute;
+inset:0;
+opacity:0;
+transform:scale(.985);
+transition:.55s ease;
+pointer-events:none;
+overflow:hidden;
+}
+
+.scene.active{
+opacity:1;
+transform:scale(1);
+}
+
+/* shared */
+
+.navbar{
+height:65px;
+padding:0 5%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+border-bottom:1px solid var(--line);
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:9px;
+font-weight:900;
+letter-spacing:2px;
+}
+
+.logo{
+width:37px;height:37px;
+border-radius:50%;
+background:var(--ink);
+color:white;
+display:grid;
+place-items:center;
+font-size:19px;
+}
+
+.navlinks{
+display:flex;
+gap:23px;
+font-size:10px;
+font-weight:800;
+}
+
+.cart-icon{
+width:37px;height:37px;
+border-radius:50%;
+background:var(--ink);
+color:white;
+display:grid;
+place-items:center;
+}
+
+/* HERO */
+
+.hero{
+height:calc(100% - 65px);
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:5%;
+align-items:center;
+padding:35px 6%;
+}
+
+.eyebrow{
+color:var(--copper);
+font-size:9px;
+font-weight:900;
+letter-spacing:2px;
+margin-bottom:13px;
+}
+
+.hero h1{
+font-size:clamp(45px,6vw,78px);
+line-height:.88;
+letter-spacing:-4px;
+}
+
+.hero h1 span{
+color:var(--olive);
+display:block;
+}
+
+.hero p{
+max-width:400px;
+color:var(--muted);
+font-size:12px;
+line-height:1.8;
+margin-top:18px;
+}
+
+.primary{
+display:inline-block;
+margin-top:22px;
+background:var(--ink);
+color:white;
+border-radius:100px;
+padding:13px 22px;
+font-size:11px;
+font-weight:900;
+}
+
+.hero-img{
+height:92%;
+border-radius:150px 150px 18px 18px;
+overflow:hidden;
+}
+
+.hero-img img{
+width:100%;height:100%;object-fit:cover;
+}
+
+/* MENU */
+
+.menu-page{
+padding-bottom:30px;
+}
+
+.menu-title{
+padding:27px 5% 15px;
+display:flex;
+justify-content:space-between;
+align-items:end;
+}
+
+.menu-title h1{
+font-size:42px;
+letter-spacing:-2px;
+}
+
+.menu-title p{
+color:var(--muted);
+font-size:10px;
+}
+
+.filters{
+margin:0 5% 18px;
+padding:9px;
+background:var(--cream);
+border-radius:14px;
+display:flex;
+gap:7px;
+}
+
+.search{
+flex:1;
+background:white;
+border-radius:9px;
+padding:10px 14px;
+color:#aaa;
+font-size:10px;
+}
+
+.filter{
+padding:10px 14px;
+border-radius:100px;
+border:1px solid var(--line);
+font-size:9px;
+font-weight:800;
+}
+
+.filter.on{
+background:var(--ink);
+color:white;
+}
+
+.products{
+padding:0 5%;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:11px;
+}
+
+.product{
+background:white;
+border-radius:14px;
+overflow:hidden;
+border:1px solid var(--line);
+}
+
+.product img{
+width:100%;
+height:150px;
+object-fit:cover;
+}
+
+.product-body{
+padding:12px;
+}
+
+.product-line{
+display:flex;
+justify-content:space-between;
+gap:10px;
+font-size:11px;
+font-weight:900;
+}
+
+.product-line span{
+color:var(--copper);
+}
+
+.product p{
+font-size:8px;
+color:var(--muted);
+margin-top:5px;
+}
+
+.add-mini{
+margin-top:9px;
+font-size:8px;
+font-weight:900;
+}
+
+/* PRODUCT CUSTOMIZE */
+
+.custom-page{
+display:grid;
+grid-template-columns:1fr 1fr;
+height:100%;
+}
+
+.custom-img{
+height:100%;
+overflow:hidden;
+}
+
+.custom-img img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.custom-content{
+padding:35px;
+overflow:hidden;
+}
+
+.custom-content h1{
+font-size:35px;
+}
+
+.custom-content>p{
+color:var(--muted);
+font-size:10px;
+line-height:1.7;
+margin-top:8px;
+}
+
+.group{
+border-top:1px solid var(--line);
+padding-top:13px;
+margin-top:15px;
+}
+
+.group strong{
+font-size:10px;
+}
+
+.options{
+display:flex;
+gap:6px;
+margin-top:8px;
+}
+
+.option{
+flex:1;
+border:1px solid var(--line);
+border-radius:9px;
+padding:10px;
+font-size:8px;
+font-weight:800;
+}
+
+.option.selected{
+background:var(--forest);
+color:white;
+}
+
+.add-cart{
+margin-top:18px;
+background:var(--ink);
+color:white;
+border-radius:10px;
+padding:13px;
+display:flex;
+justify-content:space-between;
+font-size:10px;
+font-weight:900;
+}
+
+/* CART */
+
+.cart-page{
+padding:35px 6%;
+}
+
+.page-kicker{
+color:var(--copper);
+font-size:9px;
+font-weight:900;
+}
+
+.cart-page h1,
+.checkout-page h1{
+font-size:45px;
+margin-top:3px;
+}
+
+.cart-layout{
+display:grid;
+grid-template-columns:1.3fr .7fr;
+gap:18px;
+margin-top:25px;
+}
+
+.cart-item{
+background:white;
+border:1px solid var(--line);
+border-radius:14px;
+padding:12px;
+display:grid;
+grid-template-columns:85px 1fr;
+gap:13px;
+}
+
+.cart-item img{
+width:85px;height:85px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.cart-item h3{font-size:13px}
+.cart-item p{font-size:8px;color:var(--muted);margin-top:5px}
+.cart-item strong{font-size:10px;color:var(--copper)}
+
+.summary{
+background:var(--forest);
+color:white;
+border-radius:15px;
+padding:18px;
+}
+
+.summary h2{font-size:16px;margin-bottom:15px}
+
+.sumrow{
+display:flex;
+justify-content:space-between;
+padding:6px 0;
+font-size:9px;
+color:rgba(255,255,255,.7);
+}
+
+.sumtotal{
+border-top:1px solid rgba(255,255,255,.15);
+margin-top:10px;
+padding-top:13px;
+display:flex;
+justify-content:space-between;
+font-size:13px;
+font-weight:900;
+}
+
+.checkout-btn{
+background:var(--paper);
+color:var(--ink);
+padding:11px;
+border-radius:9px;
+margin-top:14px;
+text-align:center;
+font-size:9px;
+font-weight:900;
+}
+
+/* CHECKOUT */
+
+.checkout-page{
+padding:28px 6%;
+}
+
+.checkout-grid{
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:16px;
+margin-top:18px;
+}
+
+.formbox{
+background:white;
+border:1px solid var(--line);
+border-radius:14px;
+padding:17px;
+margin-bottom:9px;
+}
+
+.formbox h3{
+font-size:12px;
+margin-bottom:11px;
+}
+
+.fields{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:7px;
+}
+
+.fake-input{
+background:var(--paper);
+border:1px solid var(--line);
+border-radius:8px;
+padding:10px;
+font-size:8px;
+color:#aaa;
+}
+
+.receive{
+display:flex;
+gap:7px;
+}
+
+.receive div{
+flex:1;
+border:1px solid var(--line);
+border-radius:9px;
+padding:11px;
+font-size:9px;
+font-weight:800;
+}
+
+.receive .selected{
+background:var(--forest);
+color:white;
+}
+
+/* PAYMENT */
+
+.pay-page{
+padding:35px 7%;
+}
+
+.pay-page h1{
+font-size:44px;
+margin-top:4px;
+}
+
+.pay-layout{
+display:grid;
+grid-template-columns:1.1fr .9fr;
+gap:17px;
+margin-top:25px;
+}
+
+.method{
+border:1px solid var(--line);
+background:white;
+border-radius:12px;
+padding:14px;
+margin-bottom:8px;
+display:flex;
+justify-content:space-between;
+font-size:10px;
+font-weight:800;
+}
+
+.method.selected{
+background:#eef1ec;
+border-color:var(--forest);
+}
+
+.confirm{
+background:var(--paper);
+color:var(--ink);
+border-radius:9px;
+padding:12px;
+text-align:center;
+margin-top:16px;
+font-size:9px;
+font-weight:900;
+}
+
+/* SUCCESS */
+
+.success{
+height:100%;
+display:grid;
+place-items:center;
+text-align:center;
+padding:40px;
+}
+
+.success-icon{
+width:70px;height:70px;
+margin:auto;
+border-radius:50%;
+background:var(--forest);
+color:white;
+display:grid;
+place-items:center;
+font-size:28px;
+}
+
+.success h1{
+font-size:55px;
+margin-top:17px;
+letter-spacing:-3px;
+}
+
+.success p{
+color:var(--muted);
+font-size:11px;
+margin-top:8px;
+}
+
+.order-number{
+margin:23px auto;
+background:var(--cream);
+border-radius:14px;
+padding:17px 40px;
+width:max-content;
+}
+
+.order-number span{
+display:block;
+color:var(--muted);
+font-size:8px;
+}
+
+.order-number strong{
+font-size:20px;
+}
+
+/* POINTER */
+
+.pointer{
+position:absolute;
+z-index:100;
+width:28px;
+height:28px;
+pointer-events:none;
+opacity:0;
+transition:
+left .7s cubic-bezier(.2,.8,.2,1),
+top .7s cubic-bezier(.2,.8,.2,1),
+opacity .25s;
+filter:drop-shadow(0 4px 5px rgba(0,0,0,.25));
+}
+
+.pointer::before{
+content:"";
+position:absolute;
+width:0;height:0;
+border-top:22px solid white;
+border-right:8px solid transparent;
+border-left:8px solid transparent;
+transform:rotate(-35deg);
+}
+
+.pointer.show{opacity:1}
+
+.click{
+position:absolute;
+width:45px;
+height:45px;
+border:2px solid var(--copper);
+border-radius:50%;
+z-index:90;
+opacity:0;
+transform:scale(.2);
+pointer-events:none;
+}
+
+.click.go{
+animation:click .65s ease;
+}
+
+@keyframes click{
+0%{opacity:0;transform:scale(.2)}
+30%{opacity:1}
+100%{opacity:0;transform:scale(1.6)}
+}
+
+/* CAPTION */
+
+.caption{
+position:absolute;
+z-index:110;
+bottom:23px;
+left:50%;
+transform:translateX(-50%) translateY(20px);
+background:rgba(23,32,27,.94);
+color:white;
+border-radius:100px;
+padding:12px 21px;
+font-size:11px;
+font-weight:800;
+opacity:0;
+transition:.3s;
+white-space:nowrap;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.caption.show{
+opacity:1;
+transform:translateX(-50%) translateY(0);
+}
+
+/* PROGRESS */
+
+.progress{
+position:absolute;
+top:0;
+right:0;
+left:0;
+height:3px;
+z-index:150;
+background:rgba(255,255,255,.12);
+}
+
+.progress span{
+display:block;
+height:100%;
+width:0;
+background:var(--copper);
+}
+
+.progress span.play{
+animation:progress 40s linear forwards;
+}
+
+@keyframes progress{
+to{width:100%}
+}
+
+.demo-label{
+position:absolute;
+top:18px;
+left:20px;
+z-index:200;
+color:white;
+font-size:9px;
+letter-spacing:2px;
+opacity:.65;
+}
+
+@media(max-width:700px){
+.browser{
+width:96vw;
+height:92vh;
+}
+
+.navlinks{display:none}
+
+.hero{
+grid-template-columns:1fr;
+}
+
+.hero-img{display:none}
+
+.products{
+grid-template-columns:1fr 1fr;
+}
+
+.product:nth-child(3){display:none}
+
+.custom-page{
+grid-template-columns:1fr;
+}
+
+.custom-img{
+height:32%;
+}
+
+.custom-content{
+padding:22px;
+}
+
+.cart-layout,
+.checkout-grid,
+.pay-layout{
+grid-template-columns:1fr;
+}
+
+.summary{
+margin-top:5px;
+}
+
+.caption{
+max-width:85%;
+white-space:normal;
+text-align:center;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="demo-label">SĒN · CUSTOMER EXPERIENCE</div>
+
+<div class="progress">
+<span id="progress"></span>
+</div>
+
+<div class="demo">
+
+<div class="browser">
+
+<div class="browserbar">
+<div class="dots"><i></i><i></i><i></i></div>
+<div class="address" id="address">sen-cafe.com</div>
+</div>
+
+<div class="screen">
+
+<!-- 1 HOME -->
+
+<section class="scene active" id="s1">
+
+<div class="navbar">
+<div class="brand">
+<div class="logo">س</div>
+SĒN
+</div>
+
+<div class="navlinks">
+<span>عن سِين</span>
+<span>اختياراتنا</span>
+<span>المنيو</span>
+</div>
+
+<div class="cart-icon">⌁</div>
+</div>
+
+<div class="hero">
+
+<div>
+<div class="eyebrow">SPECIALTY COFFEE · MUSCAT</div>
+
+<h1>
+قهوتك،
+<span>بطريقتك.</span>
+</h1>
+
+<p>
+قهوة مختصة وتجربة طلب مصممة لتكون بسيطة
+من أول اختيار إلى آخر رشفة.
+</p>
+
+<div class="primary" id="startOrder">
+ابدأ طلبك ←
+</div>
+</div>
+
+<div class="hero-img">
+<img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1000&q=85">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- 2 MENU -->
+
+<section class="scene menu-page" id="s2">
+
+<div class="navbar">
+<div class="brand">
+<div class="logo">س</div>SĒN
+</div>
+<div class="cart-icon">0</div>
+</div>
+
+<div class="menu-title">
+<div>
+<div class="eyebrow">SĒN MENU</div>
+<h1>اختر مزاجك.</h1>
+</div>
+<p>اختر مشروبك وبعدها خصصه.</p>
+</div>
+
+<div class="filters">
+<div class="search">⌕ ابحث عن مشروب...</div>
+<div class="filter on">الكل</div>
+<div class="filter">ساخن</div>
+<div class="filter">بارد</div>
+</div>
+
+<div class="products">
+
+<div class="product" id="demoProduct">
+<img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=85">
+
+<div class="product-body">
+<div class="product-line">
+Spanish Cloud
+<span>1.900</span>
+</div>
+<p>إسبريسو، حليب مخملي وحلاوة متوازنة.</p>
+<div class="add-mini">خصص طلبك ←</div>
+</div>
+</div>
+
+<div class="product">
+<img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=600&q=85">
+<div class="product-body">
+<div class="product-line">
+Pistachio Latte
+<span>2.100</span>
+</div>
+<p>لاتيه كريمي بنكهة الفستق.</p>
+<div class="add-mini">خصص طلبك ←</div>
+</div>
+</div>
+
+<div class="product">
+<img src="https://images.unsplash.com/photo-1517959105821-eaf2591984ca?auto=format&fit=crop&w=600&q=85">
+<div class="product-body">
+<div class="product-line">
+Cold Brew
+<span>2.000</span>
+</div>
+<p>استخلاص بارد ونهاية منعشة.</p>
+<div class="add-mini">خصص طلبك ←</div>
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- 3 PRODUCT -->
+
+<section class="scene" id="s3">
+
+<div class="custom-page">
+
+<div class="custom-img">
+<img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=1000&q=85">
+</div>
+
+<div class="custom-content">
+
+<div class="eyebrow">CUSTOM ORDER</div>
+<h1>Spanish Cloud</h1>
+<p>إسبريسو غني وحليب مخملي — خصصه على مزاجك.</p>
+
+<div class="group">
+<strong>الحجم</strong>
+<div class="options">
+<div class="option">عادي</div>
+<div class="option selected" id="largeOption">كبير +0.300</div>
+</div>
+</div>
+
+<div class="group">
+<strong>نوع الحليب</strong>
+<div class="options">
+<div class="option">عادي</div>
+<div class="option selected" id="oatOption">شوفان +0.250</div>
+</div>
+</div>
+
+<div class="group">
+<strong>الحلاوة</strong>
+<div class="options">
+<div class="option">بدون</div>
+<div class="option selected">متوسط 50%</div>
+<div class="option">كامل</div>
+</div>
+</div>
+
+<div class="add-cart" id="addCart">
+<span>أضف إلى السلة</span>
+<span>2.450 ر.ع</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- 4 CART -->
+
+<section class="scene cart-page" id="s4">
+
+<div class="page-kicker">YOUR ORDER · SĒN</div>
+<h1>سلتك.</h1>
+
+<div class="cart-layout">
+
+<div>
+<div class="cart-item">
+<img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=400&q=85">
+
+<div>
+<h3>Spanish Cloud</h3>
+<p>كبير · حليب شوفان · حلاوة 50%</p>
+<strong>2.450 ر.ع</strong>
+</div>
+</div>
+</div>
+
+<div class="summary">
+<h2>ملخص الطلب</h2>
+
+<div class="sumrow">
+<span>المجموع</span><strong>2.450</strong>
+</div>
+
+<div class="sumrow">
+<span>الخصم SEN10</span><strong>-0.245</strong>
+</div>
+
+<div class="sumtotal">
+<span>الإجمالي</span><strong>2.205</strong>
+</div>
+
+<div class="checkout-btn" id="checkoutButton">
+إكمال الطلب ←
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- 5 CHECKOUT -->
+
+<section class="scene checkout-page" id="s5">
+
+<div class="page-kicker">CHECKOUT · SĒN</div>
+<h1>آخر التفاصيل.</h1>
+
+<div class="checkout-grid">
+
+<div>
+
+<div class="formbox">
+<h3>بياناتك</h3>
+
+<div class="fields">
+<div class="fake-input" id="nameField">الاسم</div>
+<div class="fake-input" id="phoneField">رقم الهاتف</div>
+</div>
+</div>
+
+<div class="formbox">
+<h3>كيف تستلم طلبك؟</h3>
+
+<div class="receive">
+<div class="selected" id="pickupOption">
+استلام من الفرع
+</div>
+<div>توصيل</div>
+</div>
+</div>
+
+</div>
+
+<div class="summary">
+
+<h2>ملخص الطلب</h2>
+
+<div class="sumrow">
+<span>Spanish Cloud</span>
+<strong>2.450</strong>
+</div>
+
+<div class="sumrow">
+<span>خصم SEN10</span>
+<strong>-0.245</strong>
+</div>
+
+<div class="sumtotal">
+<span>الإجمالي</span>
+<strong>2.205</strong>
+</div>
+
+<div class="checkout-btn" id="paymentButton">
+المتابعة للدفع ←
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- 6 PAYMENT -->
+
+<section class="scene pay-page" id="s6">
+
+<div class="page-kicker">PAYMENT · FINAL STEP</div>
+<h1>خطوة أخيرة.</h1>
+
+<div class="pay-layout">
+
+<div>
+<div class="method selected" id="cashMethod">
+<span>☕ الدفع عند الاستلام</span>
+<span>●</span>
+</div>
+
+<div class="method">
+<span>↗ تحويل بنكي</span>
+<span>○</span>
+</div>
+</div>
+
+<div class="summary">
+<h2>ملخص الدفع</h2>
+
+<div class="sumrow">
+<span>المجموع</span>
+<strong>2.450</strong>
+</div>
+
+<div class="sumrow">
+<span>الخصم</span>
+<strong>-0.245</strong>
+</div>
+
+<div class="sumtotal">
+<span>الإجمالي</span>
+<strong>2.205 ر.ع</strong>
+</div>
+
+<div class="confirm" id="confirmOrder">
+تأكيد الطلب ←
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- 7 SUCCESS -->
+
+<section class="scene" id="s7">
+
+<div class="success">
+
+<div>
+<div class="success-icon">✓</div>
+
+<div class="eyebrow" style="margin-top:20px">
+ORDER CONFIRMED
+</div>
+
+<h1>طلبك وصل.</h1>
+
+<p>
+استلمنا طلبك — والحين يبدأ دورنا.
+</p>
+
+<div class="order-number">
+<span>رقم الطلب</span>
+<strong>SEN-2847</strong>
+</div>
+
+<div class="primary">
+تم استلام الطلب ✓
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<div class="pointer" id="pointer"></div>
+<div class="click" id="click"></div>
+<div class="caption" id="caption"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+const scenes=[...document.querySelectorAll(".scene")];
+const pointer=document.getElementById("pointer");
+const click=document.getElementById("click");
+const caption=document.getElementById("caption");
+const address=document.getElementById("address");
+const progress=document.getElementById("progress");
+
+let timers=[];
+
+function later(fn,time){
+const timer=setTimeout(fn,time);
+timers.push(timer);
+}
+
+function scene(number,url){
+scenes.forEach(s=>s.classList.remove("active"));
+document.getElementById("s"+number).classList.add("active");
+address.textContent=url;
+}
+
+function say(text){
+caption.textContent=text;
+caption.classList.add("show");
+}
+
+function hideSay(){
+caption.classList.remove("show");
+}
+
+function moveTo(element){
+const screen=document.querySelector(".screen");
+const screenRect=screen.getBoundingClientRect();
+const rect=element.getBoundingClientRect();
+
+pointer.style.left=
+(rect.left-screenRect.left+rect.width/2)+"px";
+
+pointer.style.top=
+(rect.top-screenRect.top+rect.height/2)+"px";
+
+pointer.classList.add("show");
+}
+
+function pulse(element){
+const screen=document.querySelector(".screen");
+const screenRect=screen.getBoundingClientRect();
+const rect=element.getBoundingClientRect();
+
+click.style.left=
+(rect.left-screenRect.left+rect.width/2-22)+"px";
+
+click.style.top=
+(rect.top-screenRect.top+rect.height/2-22)+"px";
+
+click.classList.remove("go");
+void click.offsetWidth;
+click.classList.add("go");
+}
+
+function clickTarget(element){
+moveTo(element);
+
+later(()=>{
+pulse(element);
+},700);
+}
+
+function startDemo(){
+
+timers.forEach(clearTimeout);
+timers=[];
+
+progress.classList.remove("play");
+void progress.offsetWidth;
+progress.classList.add("play");
+
+scene(1,"sen-cafe.com");
+pointer.classList.remove("show");
+
+say("نبدأ من الصفحة الرئيسية");
+
+later(()=>{
+clickTarget(document.getElementById("startOrder"));
+say("هنا يبدأ العميل طلبه");
+},2500);
+
+
+later(()=>{
+scene(2,"sen-cafe.com/menu");
+say("يختار من المنيو");
+pointer.classList.remove("show");
+},5200);
+
+
+later(()=>{
+clickTarget(document.getElementById("demoProduct"));
+say("نختار Spanish Cloud");
+},7500);
+
+
+later(()=>{
+scene(3,"sen-cafe.com/product/spanish-cloud");
+pointer.classList.remove("show");
+say("والحين نخصص المشروب");
+},10200);
+
+
+later(()=>{
+clickTarget(document.getElementById("largeOption"));
+say("نختار الحجم الكبير");
+},12600);
+
+
+later(()=>{
+clickTarget(document.getElementById("oatOption"));
+say("ونغيّر الحليب إلى الشوفان");
+},15100);
+
+
+later(()=>{
+clickTarget(document.getElementById("addCart"));
+say("ثم نضيفه للسلة");
+},17700);
+
+
+later(()=>{
+scene(4,"sen-cafe.com/cart");
+pointer.classList.remove("show");
+say("هنا العميل يراجع طلبه ويشوف الإجمالي");
+},20300);
+
+
+later(()=>{
+clickTarget(document.getElementById("checkoutButton"));
+say("نكمل الطلب");
+},22800);
+
+
+later(()=>{
+scene(5,"sen-cafe.com/checkout");
+pointer.classList.remove("show");
+say("ندخل البيانات ونحدد طريقة الاستلام");
+},25100);
+
+
+later(()=>{
+const name=document.getElementById("nameField");
+name.textContent="سارة";
+clickTarget(name);
+},27000);
+
+
+later(()=>{
+const phone=document.getElementById("phoneField");
+phone.textContent="9XXXXXXX";
+clickTarget(phone);
+say("البيانات جاهزة");
+},28700);
+
+
+later(()=>{
+clickTarget(document.getElementById("paymentButton"));
+say("نتجه للدفع");
+},30700);
+
+
+later(()=>{
+scene(6,"sen-cafe.com/payment");
+pointer.classList.remove("show");
+say("نختار طريقة الدفع");
+},32800);
+
+
+later(()=>{
+clickTarget(document.getElementById("cashMethod"));
+},34500);
+
+
+later(()=>{
+clickTarget(document.getElementById("confirmOrder"));
+say("ونؤكد الطلب");
+},36100);
+
+
+later(()=>{
+scene(7,"sen-cafe.com/order-confirmed");
+pointer.classList.remove("show");
+say("تم! الطلب وصل بنجاح ✓");
+},38200);
+
+
+later(()=>{
+hideSay();
+},40000);
+
+
+later(()=>{
+startDemo();
+},43000);
+}
+
+window.addEventListener("load",()=>{
+setTimeout(startDemo,500);
+});
+</script>
+
+</body>
+</html>
