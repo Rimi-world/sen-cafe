@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SĒN Café | سِين</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--ink:#17201b;
+--forest:#25382d;
+--olive:#66745d;
+--cream:#f3eee4;
+--paper:#fbf8f1;
+--copper:#b7784f;
+--line:rgba(23,32,27,.12);
+--white:#fff;
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:"Tajawal",sans-serif;
+background:var(--paper);
+color:var(--ink);
+overflow-x:hidden;
+}
+
+a{
+color:inherit;
+text-decoration:none;
+}
+
+button{
+font-family:inherit;
+}
+
+img{
+display:block;
+width:100%;
+}
+
+/* HEADER */
+
+header{
+height:84px;
+padding:0 6%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:rgba(251,248,241,.92);
+backdrop-filter:blur(18px);
+border-bottom:1px solid var(--line);
+position:fixed;
+top:0;
+right:0;
+left:0;
+z-index:100;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:13px;
+}
+
+.logo{
+width:47px;
+height:47px;
+background:var(--ink);
+color:var(--cream);
+border-radius:50%;
+display:grid;
+place-items:center;
+font-size:24px;
+font-weight:900;
+}
+
+.brand-text strong{
+display:block;
+font-size:17px;
+letter-spacing:3px;
+}
+
+.brand-text span{
+font-size:11px;
+color:var(--olive);
+}
+
+nav{
+display:flex;
+align-items:center;
+gap:30px;
+font-size:14px;
+font-weight:700;
+}
+
+nav a{
+transition:.25s;
+}
+
+nav a:hover{
+color:var(--copper);
+}
+
+.cart{
+width:44px;
+height:44px;
+border-radius:50%;
+background:var(--ink);
+color:white;
+display:grid;
+place-items:center;
+font-size:19px;
+}
+
+/* HERO */
+
+.hero{
+min-height:100vh;
+padding:118px 6% 42px;
+display:grid;
+grid-template-columns:1fr 1.05fr;
+gap:6vw;
+align-items:center;
+}
+
+.eyebrow{
+display:flex;
+align-items:center;
+gap:12px;
+color:var(--copper);
+font-weight:800;
+font-size:12px;
+letter-spacing:1px;
+margin-bottom:25px;
+}
+
+.eyebrow::before{
+content:"";
+width:42px;
+height:1px;
+background:var(--copper);
+}
+
+.hero h1{
+font-size:clamp(58px,8vw,120px);
+line-height:.87;
+letter-spacing:-5px;
+font-weight:900;
+}
+
+.hero h1 span{
+display:block;
+color:var(--olive);
+}
+
+.hero-copy{
+max-width:510px;
+margin-top:30px;
+font-size:17px;
+line-height:1.9;
+color:#5f665f;
+}
+
+.actions{
+display:flex;
+align-items:center;
+gap:13px;
+margin-top:34px;
+}
+
+.primary{
+padding:16px 27px;
+background:var(--ink);
+color:white;
+border-radius:100px;
+font-weight:800;
+transition:.3s;
+}
+
+.primary:hover{
+transform:translateY(-3px);
+background:var(--forest);
+}
+
+.secondary{
+padding:15px 25px;
+border:1px solid var(--line);
+border-radius:100px;
+font-weight:800;
+}
+
+.hero-image{
+position:relative;
+height:72vh;
+min-height:570px;
+border-radius:200px 200px 24px 24px;
+overflow:hidden;
+}
+
+.hero-image img{
+height:100%;
+object-fit:cover;
+transition:1s;
+}
+
+.hero-image:hover img{
+transform:scale(1.035);
+}
+
+.floating-card{
+position:absolute;
+bottom:25px;
+left:25px;
+right:25px;
+padding:19px 22px;
+background:rgba(251,248,241,.91);
+backdrop-filter:blur(14px);
+border-radius:18px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.floating-card small{
+display:block;
+color:var(--olive);
+margin-bottom:3px;
+}
+
+.floating-card strong{
+font-size:17px;
+}
+
+/* STRIP */
+
+.strip{
+background:var(--ink);
+color:var(--cream);
+padding:19px 0;
+overflow:hidden;
+}
+
+.strip-track{
+display:flex;
+gap:55px;
+width:max-content;
+white-space:nowrap;
+animation:move 22s linear infinite;
+font-size:13px;
+font-weight:700;
+letter-spacing:1px;
+}
+
+.strip-track span::after{
+content:"✦";
+margin-right:55px;
+color:var(--copper);
+}
+
+@keyframes move{
+from{transform:translateX(0)}
+to{transform:translateX(50%)}
+}
+
+/* STORY */
+
+.story{
+padding:120px 6%;
+display:grid;
+grid-template-columns:.85fr 1.15fr;
+gap:8vw;
+align-items:center;
+}
+
+.section-number{
+color:var(--copper);
+font-size:12px;
+font-weight:900;
+margin-bottom:18px;
+}
+
+.story h2,
+.menu-head h2,
+.experience h2{
+font-size:clamp(42px,6vw,82px);
+line-height:1.03;
+letter-spacing:-3px;
+}
+
+.story-copy{
+font-size:18px;
+line-height:2;
+color:#646a64;
+max-width:620px;
+}
+
+.story-copy strong{
+color:var(--ink);
+}
+
+.signature{
+margin-top:27px;
+font-weight:900;
+font-size:21px;
+}
+
+/* MENU */
+
+.menu-section{
+padding:110px 6%;
+background:var(--cream);
+}
+
+.menu-head{
+display:flex;
+justify-content:space-between;
+align-items:end;
+gap:30px;
+margin-bottom:50px;
+}
+
+.menu-head p{
+color:#696d68;
+max-width:400px;
+line-height:1.8;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.product{
+background:var(--paper);
+border-radius:22px;
+overflow:hidden;
+transition:.35s;
+border:1px solid rgba(23,32,27,.06);
+}
+
+.product:hover{
+transform:translateY(-8px);
+box-shadow:0 20px 60px rgba(23,32,27,.10);
+}
+
+.product-image{
+height:350px;
+overflow:hidden;
+}
+
+.product-image img{
+height:100%;
+object-fit:cover;
+transition:.6s;
+}
+
+.product:hover img{
+transform:scale(1.05);
+}
+
+.product-info{
+padding:22px;
+}
+
+.product-top{
+display:flex;
+justify-content:space-between;
+gap:15px;
+align-items:start;
+}
+
+.product h3{
+font-size:21px;
+}
+
+.price{
+font-weight:900;
+color:var(--copper);
+white-space:nowrap;
+}
+
+.product p{
+margin-top:8px;
+color:#777b75;
+font-size:13px;
+line-height:1.7;
+}
+
+.order-link{
+margin-top:18px;
+display:inline-flex;
+align-items:center;
+gap:8px;
+font-size:13px;
+font-weight:900;
+}
+
+/* EXPERIENCE */
+
+.experience{
+padding:120px 6%;
+background:var(--forest);
+color:var(--cream);
+}
+
+.experience-header{
+max-width:900px;
+margin-bottom:65px;
+}
+
+.experience-header p{
+margin-top:25px;
+color:rgba(243,238,228,.67);
+line-height:1.9;
+max-width:560px;
+}
+
+.steps{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+border-top:1px solid rgba(255,255,255,.15);
+}
+
+.step{
+padding:30px 25px;
+border-left:1px solid rgba(255,255,255,.15);
+}
+
+.step:last-child{
+border-left:0;
+}
+
+.step-number{
+font-size:12px;
+color:var(--copper);
+font-weight:900;
+}
+
+.step h3{
+margin-top:45px;
+font-size:21px;
+}
+
+.step p{
+color:rgba(243,238,228,.62);
+margin-top:9px;
+line-height:1.8;
+font-size:13px;
+}
+
+/* CTA */
+
+.final{
+min-height:620px;
+display:grid;
+place-items:center;
+text-align:center;
+padding:100px 6%;
+position:relative;
+overflow:hidden;
+}
+
+.final::before{
+content:"سِين";
+position:absolute;
+font-size:35vw;
+font-weight:900;
+color:rgba(23,32,27,.025);
+white-space:nowrap;
+z-index:0;
+}
+
+.final-content{
+position:relative;
+z-index:1;
+}
+
+.final small{
+color:var(--copper);
+font-weight:900;
+}
+
+.final h2{
+margin:18px auto 34px;
+font-size:clamp(48px,7vw,92px);
+line-height:1;
+max-width:850px;
+}
+
+/* FOOTER */
+
+footer{
+padding:38px 6%;
+border-top:1px solid var(--line);
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:12px;
+color:#777;
+}
+
+footer strong{
+color:var(--ink);
+letter-spacing:2px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+nav{
+display:none;
+}
+
+header{
+height:74px;
+padding:0 5%;
+}
+
+.hero{
+grid-template-columns:1fr;
+padding:110px 5% 35px;
+gap:45px;
+}
+
+.hero h1{
+font-size:68px;
+}
+
+.hero-image{
+height:62vh;
+min-height:470px;
+}
+
+.story{
+grid-template-columns:1fr;
+padding:85px 5%;
+}
+
+.products{
+grid-template-columns:1fr;
+}
+
+.product-image{
+height:390px;
+}
+
+.menu-section{
+padding:85px 5%;
+}
+
+.menu-head{
+align-items:start;
+flex-direction:column;
+}
+
+.experience{
+padding:85px 5%;
+}
+
+.steps{
+grid-template-columns:1fr 1fr;
+}
+
+.step{
+border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+footer{
+flex-direction:column;
+gap:12px;
+}
+}
+
+@media(max-width:520px){
+
+.brand-text{
+display:none;
+}
+
+.hero h1{
+font-size:58px;
+letter-spacing:-3px;
+}
+
+.hero-copy{
+font-size:15px;
+}
+
+.actions{
+align-items:stretch;
+flex-direction:column;
+}
+
+.actions a{
+text-align:center;
+}
+
+.hero-image{
+min-height:430px;
+border-radius:140px 140px 20px 20px;
+}
+
+.product-image{
+height:320px;
+}
+
+.steps{
+grid-template-columns:1fr;
+}
+
+.story h2,
+.menu-head h2,
+.experience h2{
+letter-spacing:-2px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a class="brand" href="index.html">
+<div class="logo">س</div>
+
+<div class="brand-text">
+<strong>SĒN</strong>
+<span>SPECIALTY COFFEE</span>
+</div>
+</a>
+
+<nav>
+<a href="#story">عن سِين</a>
+<a href="#favorites">اختياراتنا</a>
+<a href="#experience">طريقة الطلب</a>
+<a href="menu.html">المنيو</a>
+</nav>
+
+<a class="cart" href="cart.html">⌁</a>
+
+</header>
+
+
+<main>
+
+<section class="hero">
+
+<div>
+
+<div class="eyebrow">
+SPECIALTY COFFEE · MUSCAT
+</div>
+
+<h1>
+قهوتك،
+<span>بطريقتك.</span>
+</h1>
+
+<p class="hero-copy">
+في سِين، كل كوب يبدأ باختيارك.
+قهوة مختصة، تفاصيل بسيطة، وتجربة صُممت
+لتأخذ وقتك معها — من أول اختيار إلى آخر رشفة.
+</p>
+
+<div class="actions">
+
+<a href="menu.html" class="primary">
+ابدأ طلبك ←
+</a>
+
+<a href="#story" class="secondary">
+اكتشف سِين
+</a>
+
+</div>
+
+</div>
+
+
+<div class="hero-image">
+
+<img
+src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1400&q=90"
+alt="SEN Cafe"
+>
+
+<div class="floating-card">
+
+<div>
+<small>اختيار سِين اليوم</small>
+<strong>Spanish Cloud</strong>
+</div>
+
+<strong>1.900 ر.ع</strong>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="strip">
+
+<div class="strip-track">
+<span>SĒN SPECIALTY COFFEE</span>
+<span>ROASTED WITH INTENTION</span>
+<span>BREWED FOR YOUR MOMENT</span>
+<span>قهوة على مهل</span>
+<span>SĒN SPECIALTY COFFEE</span>
+<span>ROASTED WITH INTENTION</span>
+<span>BREWED FOR YOUR MOMENT</span>
+<span>قهوة على مهل</span>
+</div>
+
+</section>
+
+
+<section class="story" id="story">
+
+<div>
+
+<div class="section-number">01 / OUR STORY</div>
+
+<h2>
+مو مجرد<br>
+كوب قهوة.
+</h2>
+
+</div>
+
+<div class="story-copy">
+
+<p>
+<strong>سِين مساحة للحظة اللي بين الزحمة والهدوء.</strong>
+اخترنا القهوة بعناية، وبنينا التجربة حول شيء واحد:
+أن يكون طلبك واضح، سريع، ومصمم على ذوقك.
+</p>
+
+<p style="margin-top:18px;">
+من درجة الحلاوة ونوع الحليب إلى الإضافات،
+أنت تحدد التفاصيل — ونحن نهتم بالباقي.
+</p>
+
+<div class="signature">
+قهوة على مهل.
+</div>
+
+</div>
+
+</section>
+
+
+<section class="menu-section" id="favorites">
+
+<div class="menu-head">
+
+<div>
+<div class="section-number">02 / SĒN PICKS</div>
+<h2>اختياراتنا.</h2>
+</div>
+
+<p>
+ثلاثة من أكثر أكواب سِين تميزًا.
+اختر كوبك وخصصه بالطريقة التي تناسب مزاجك.
+</p>
+
+</div>
+
+
+<div class="products">
+
+
+<article class="product">
+
+<a href="product.html?item=spanish">
+
+<div class="product-image">
+<img
+src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=88"
+alt="Spanish Cloud"
+>
+</div>
+
+<div class="product-info">
+
+<div class="product-top">
+<h3>Spanish Cloud</h3>
+<span class="price">1.900 ر.ع</span>
+</div>
+
+<p>
+إسبريسو، حليب كريمي ولمسة حلاوة متوازنة.
+</p>
+
+<span class="order-link">
+خصص كوبك ←
+</span>
+
+</div>
+
+</a>
+
+</article>
+
+
+<article class="product">
+
+<a href="product.html?item=pistachio">
+
+<div class="product-image">
+<img
+src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=900&q=88"
+alt="Pistachio Latte"
+>
+</div>
+
+<div class="product-info">
+
+<div class="product-top">
+<h3>Pistachio Latte</h3>
+<span class="price">2.100 ر.ع</span>
+</div>
+
+<p>
+لاتيه ناعم بطابع الفستق ولمسة سِين الخاصة.
+</p>
+
+<span class="order-link">
+خصص كوبك ←
+</span>
+
+</div>
+
+</a>
+
+</article>
+
+
+<article class="product">
+
+<a href="product.html?item=coldbrew">
+
+<div class="product-image">
+<img
+src="https://images.unsplash.com/photo-1517959105821-eaf2591984ca?auto=format&fit=crop&w=900&q=88"
+alt="Cold Brew"
+>
+</div>
+
+<div class="product-info">
+
+<div class="product-top">
+<h3>SĒN Cold Brew</h3>
+<span class="price">2.000 ر.ع</span>
+</div>
+
+<p>
+استخلاص بارد، نكهة نظيفة ونهاية منعشة.
+</p>
+
+<span class="order-link">
+خصص كوبك ←
+</span>
+
+</div>
+
+</a>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+<section class="experience" id="experience">
+
+<div class="experience-header">
+
+<div class="section-number">
+03 / YOUR ORDER
+</div>
+
+<h2>
+من مزاجك<br>
+إلى كوبك.
+</h2>
+
+<p>
+تجربة طلب صممناها لتكون بسيطة من البداية للنهاية.
+أربع خطوات، وكوبك يكون في الطريق.
+</p>
+
+</div>
+
+
+<div class="steps">
+
+<div class="step">
+<span class="step-number">01</span>
+<h3>اختر</h3>
+<p>
+تصفح المنيو واختر المشروب أو الحلى اللي يناسبك.
+</p>
+</div>
+
+<div class="step">
+<span class="step-number">02</span>
+<h3>خصص</h3>
+<p>
+الحجم، الحليب، مستوى الحلاوة والإضافات — على مزاجك.
+</p>
+</div>
+
+<div class="step">
+<span class="step-number">03</span>
+<h3>راجع</h3>
+<p>
+شوف سلتك وعدّل الكمية قبل إكمال الطلب.
+</p>
+</div>
+
+<div class="step">
+<span class="step-number">04</span>
+<h3>استلم</h3>
+<p>
+اختر طريقة الاستلام وأكمل بيانات طلبك.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="final">
+
+<div class="final-content">
+
+<small>YOUR MOMENT STARTS HERE</small>
+
+<h2>
+جاهز لكوب<br>
+على مزاجك؟
+</h2>
+
+<a href="menu.html" class="primary">
+تصفح المنيو ←
+</a>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+<strong>SĒN CAFÉ</strong>
+
+<span>
+Specialty Coffee · Muscat · Demo Experience
+</span>
+
+<span>
+© 2026 SĒN
+</span>
+
+</footer>
+
+</body>
+</html>
